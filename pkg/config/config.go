@@ -9,7 +9,7 @@ import (
 
 	"github.com/moshebe/gebug/pkg/render"
 	"github.com/spf13/afero"
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 )
 
 // AppFs hold the file-system abstraction for this package
