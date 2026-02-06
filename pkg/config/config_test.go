@@ -137,8 +137,8 @@ runtime_image: golang:1.18
 debugger_enabled: true
 debugger_port: 40000
 expose_ports:
-- "8080"
-- 8081:8081
+    - "8080"
+    - 8081:8081
 networks: []
 environment: []
 `,

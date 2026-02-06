@@ -48,6 +48,27 @@ Flags:
 Use "gebug [command] --help" for more information about a command.
 ```
 
+## Version Requirements
+
+- **Go:** 1.24+ (for building from source)
+- **Docker:** 20.10+
+- **Docker Compose:** 2.0+
+
+### Upgrading from v1.x
+
+Breaking changes in v2.0:
+1. **Go 1.24 minimum** (was 1.16)
+2. **Default runtime:** `golang:1.23` (was `golang:1.20`)
+3. **Web UI rewrite:** Vue 3 + Vite (Vue 2 removed)
+4. **Docker image:** Distroless base (~30MB vs ~1.5GB)
+
+To upgrade:
+```bash
+brew upgrade gebug
+cd your-project
+gebug destroy && gebug init  # Regenerates config with new defaults
+```
+
 # Demo
 #### Configure workspace for Hot-Reload
 ![](assets/demo-hot-reload.gif)
@@ -75,7 +96,7 @@ Let's examine the `config.yaml` fields so you will feel more comfortable editing
 | output_binary    	| /app                           	    | output binary artifact inside the runtime container                                                                                                                                                                                     	|
 | build_command    	| go build -o {{.output_binary}}  	    | build command inside the runtime container.  Note you can reference other configuration fields. When enabling Debugger `-gcflags="all=-N -l"` will be appended  to the build command to stop compiler optimization and symbol removing 	|
 | run_command      	| {.output_binary}}              	    | run command, probably most of the time will just be the binary artifact path                                                                                                                                                            	|
-| runtime_image    	| golang:1.20                    	    | base Docker image for the runtime container                                                                                                                                                                                             	|
+| runtime_image    	| golang:1.23                    	    | base Docker image for the runtime container                                                                                                                                                                                             	|
 | debugger_enabled 	| false                            	    | whether to enable delve debugger inside the container or just use hot-reload                                                                                                                                                            	|
 | debugger_port    	| 40000                            	    | delve debugger listen port, relevant only if `debugger_enabled` was set                                                                                                                                                                 	|
 | expose_ports     	| []                               	    | list of ports to expose inside the container. Uses the same syntax as docker-compose for mapping between host and container ports(e.g: "8080:8080"). No need to add the delve debugger listen port as it will be auto-added            	|

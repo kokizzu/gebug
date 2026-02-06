@@ -8,14 +8,14 @@ jobs:
     name: go-releaser
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0 # See: https://goreleaser.com/ci/actions/
       - run: git fetch --force --tags
-      - uses: actions/setup-go@v4
+      - uses: actions/setup-go@v5
         with:
           go-version: stable
-      - uses: goreleaser/goreleaser-action@v4
+      - uses: goreleaser/goreleaser-action@v6
         with:
           version: latest
           args: release --clean

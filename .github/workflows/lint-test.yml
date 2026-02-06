@@ -16,25 +16,25 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-go@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
         with:
-          go-version: '^1.18'
+          go-version: '1.23'
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@v6
         with:
-          version: v1.55.2
+          version: latest
   test:
     name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Install Go
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v5
         with:
-          go-version: '1.21.6'
+          go-version: '1.23'
       - name: Checkout code
-        uses: actions/checkout@v3
-      - uses: actions/cache@v2
+        uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
           # In order:
           # * Module download cache
@@ -53,6 +53,11 @@ jobs:
         run: go test -cover ./...
       - name: Coverage
         if: github.repository_owner == 'moshebe'
-        run: |
-          make coverage
-          bash <(curl -s https://codecov.io/bash)
+        run: make coverage
+      - name: Upload coverage
+        if: github.repository_owner == 'moshebe'
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage.txt
+          fail_ci_if_error: false
