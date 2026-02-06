@@ -12,7 +12,7 @@ require (
 	github.com/manifoldco/promptui v0.9.0
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c
-	github.com/spf13/afero v1.11.0
+	github.com/spf13/afero v1.15.0
 	github.com/spf13/cobra v1.8.1
 	github.com/stretchr/testify v1.10.0
 	go.uber.org/zap v1.27.0
