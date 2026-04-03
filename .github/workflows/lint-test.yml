@@ -28,12 +28,12 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
       - name: Install Go
         uses: actions/setup-go@v6
         with:
           go-version-file: 'go.mod'
-      - name: Checkout code
-        uses: actions/checkout@v6
       - uses: actions/cache@v5
         with:
           # In order:
